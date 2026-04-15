@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: #0d1117;
+  color: #c9d1d9;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: #0d1117; }
+::-webkit-scrollbar-thumb  { background: #30363d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a855f7; }
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Stagger ── */
+.stagger > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger > *:nth-child(2) { transition-delay: 0.10s; }
+.stagger > *:nth-child(3) { transition-delay: 0.16s; }
+.stagger > *:nth-child(4) { transition-delay: 0.22s; }
+.stagger > *:nth-child(5) { transition-delay: 0.28s; }
+
+/* ── Card hover ── */
+.card-hover {
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+.card-hover:hover {
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ── Button ── */
+.btn { transition: all 0.18s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: scale(0.97); }
+
+/* ── Nav link ── */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ''; position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1.5px;
+  background: #a855f7;
+  transition: width 0.22s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ── Tag pill ── */
+.tag {
+  display: inline-flex; padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(168,85,247,0.25);
+  font-size: 0.72rem;
+  color: #a855f7;
+  background: rgba(168,85,247,0.08);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.tag:hover { border-color: #a855f7; color: #d8b4fe; background: rgba(168,85,247,0.15); }
+
+/* ── Dot pulse ── */
+.dot-pulse { animation: dp 2s ease-in-out infinite; }
+@keyframes dp {
+  0%,100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(168,85,247,0); }
+}
+
+/* ── Blink cursor ── */
+.cursor::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+  color: #a855f7;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Marquee ── */
+.marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── Metric card shimmer ── */
+.metric-card {
+  position: relative; overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.metric-card:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.5); }
+.metric-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(168,85,247,0.07) 50%, transparent 70%);
+  background-size: 200% 100%;
+  opacity: 0; transition: opacity 0.2s;
+}
+.metric-card:hover::after { opacity: 1; animation: shimmer 1.3s linear infinite; }
+@keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+
+/* ── Float ── */
+.animate-float { animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Fade up ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.animate-fade-up { animation: fadeUp 0.35s ease forwards; }
