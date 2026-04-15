@@ -158,14 +158,11 @@ export default function Hero() {
                 {/* Name + bio */}
                 <div className="flex-1 min-w-0">
                   {/* Name + role on same line like screenshot */}
-                  <div className="flex flex-wrap items-baseline gap-3 mb-2">
+                  <div className="mb-4">
                     <h1 className="font-mono font-bold text-2xl sm:text-3xl text-purple">
                       Jayathi Mishra
                     </h1>
-                    <span className="font-mono text-sm text-ink-muted">
-                      {/* <span className="text-ink">{role}</span> */}
-                      {/* <span className="cursor" /> */}
-                    </span>
+                    <p className="font-mono text-base sm:text-lg text-ink font-medium">Software Developer</p>
                   </div>
 
                   {/* Bio */}
@@ -242,11 +239,11 @@ export default function Hero() {
 
         {/* Hint text below dots */}
         {isOpen && (
-         <p className="font-mono text-xs text-ink-dim mt-3 ml-1">
-  <span className="text-red-500">●</span> close → hides terminal &nbsp;
-  <span className="text-yellow-500">●</span> minimize → shows tech fact &nbsp;
-  <span className="text-green-500">●</span> expand → widens terminal
-</p>
+         <p className="font-mono text-[10px] sm:text-xs text-ink-dim mt-3 ml-1 flex flex-wrap gap-y-1 gap-x-4">
+          <span className="flex items-center gap-1.5"><span className="text-red-500">●</span> close → hide</span>
+          <span className="flex items-center gap-1.5"><span className="text-yellow-500">●</span> minimize → fact</span>
+          <span className="flex items-center gap-1.5"><span className="text-green-500">●</span> expand → widen</span>
+        </p>
         )}
 
       </div>

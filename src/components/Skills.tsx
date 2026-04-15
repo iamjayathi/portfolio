@@ -10,7 +10,7 @@ const allSkills = [
 
 const categories = [
   { icon: '⚡', name: 'Languages & Runtime',
-    skills: ['JavaScript','TypeScript','Python','SQL','Node.js'] },
+    skills: ['JavaScript','TypeScript','Python','SQL','Node.js', 'Java'] },
   { icon: '🤖', name: 'AI / LLM',
     skills: ['LangChain','OpenAI API','RAG Pipelines','Tool-calling Agents','Vercel AI SDK'] },
   { icon: '🔧', name: 'Backend & Queues',

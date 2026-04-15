@@ -37,10 +37,10 @@ export default function Contact() {
                 className="btn group flex items-center justify-between py-5 hover:pl-3 transition-all duration-200"
               >
                 <div className="flex items-center gap-6 sm:gap-10">
-                  <span className="font-mono text-xs text-ink-dim uppercase tracking-widest w-14 flex-shrink-0">
+                  <span className="font-mono text-xs text-ink-dim uppercase tracking-widest w-16 sm:w-14 flex-shrink-0">
                     {link.label}
                   </span>
-                  <span className="font-mono text-sm sm:text-base text-ink font-medium group-hover:text-purple transition-colors duration-200">
+                  <span className="font-mono text-sm sm:text-base text-ink font-medium group-hover:text-purple transition-colors duration-200 break-all leading-relaxed">
                     {link.value}
                   </span>
                 </div>

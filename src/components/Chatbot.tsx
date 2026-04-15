@@ -345,13 +345,9 @@ export default function Chatbot() {
 
   // ── Dragging logic ────────────────────────────────────────────────────────
   const onMouseDown = (e: React.MouseEvent) => {
-    // Only left click
     if (e.button !== 0) return;
-    
-    // Calculate current position if not set
     const el = (e.currentTarget as HTMLElement);
     const rect = el.getBoundingClientRect();
-    
     dragRef.current = {
       startX: e.clientX,
       startY: e.clientY,
@@ -359,17 +355,33 @@ export default function Chatbot() {
       buttonY: rect.top,
       moved: false,
     };
-    
     setIsDragging(true);
     e.preventDefault();
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    const el = (e.currentTarget as HTMLElement);
+    const rect = el.getBoundingClientRect();
+    dragRef.current = {
+      startX: touch.clientX,
+      startY: touch.clientY,
+      buttonX: rect.left,
+      buttonY: rect.top,
+      moved: false,
+    };
+    setIsDragging(true);
+  };
+
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent | TouchEvent) => {
       if (!dragRef.current) return;
       
-      const dx = e.clientX - dragRef.current.startX;
-      const dy = e.clientY - dragRef.current.startY;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+      const dx = clientX - dragRef.current.startX;
+      const dy = clientY - dragRef.current.startY;
       
       if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
         dragRef.current.moved = true;
@@ -381,24 +393,22 @@ export default function Chatbot() {
       setPos({ x: newX, y: newY });
     };
 
-    const onMouseUp = () => {
-      if (dragRef.current) {
-        // If we didn't move much, it's a click handled by onClick (sort of)
-        // But we need to prevent the onClick if we DID move.
-        // We'll use a capture phase or just let the button handler check dragRef.
-      }
+    const onEnd = () => {
       setIsDragging(false);
-      // We keep dragRef until the cleanup to allow onClick to check 'moved'
       setTimeout(() => { dragRef.current = null; }, 50);
     };
 
     if (isDragging) {
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+      window.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('touchend', onEnd);
     }
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onEnd);
     };
   }, [isDragging]);
 
@@ -435,6 +445,7 @@ export default function Chatbot() {
     return (
       <button
         onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
         onClick={toggleOpen}
         className={`fixed z-50 flex items-center gap-2 px-4 py-3 bg-surface border border-purple/40 rounded-xl font-mono text-sm text-purple shadow-lg hover:border-purple hover:shadow-purple/20 hover:shadow-xl transition-all duration-200 group ${isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'}`}
         style={{ 
@@ -443,8 +454,8 @@ export default function Chatbot() {
           transition: isDragging ? 'none' : 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        {/* Drag handle hint */}
-        <div className="flex flex-col items-center justify-center border-r border-purple/20 pr-2 mr-1 py-1 select-none pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity">
+        {/* Drag handle hint - hidden on small screens */}
+        <div className="hidden sm:flex flex-col items-center justify-center border-r border-purple/20 pr-2 mr-1 py-1 select-none pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity">
           <span className="text-[7px] font-black text-purple/50 uppercase tracking-widest mb-1" style={{ writingMode: 'vertical-lr', transform: 'rotate(180deg)' }}>drag</span>
           <div className="flex flex-col gap-0.5">
             {[1,2,3].map(i => <div key={i} className="w-0.5 h-0.5 rounded-full bg-purple/40" />)}
@@ -502,6 +513,7 @@ export default function Chatbot() {
       {/* Title bar (Draggable area) */}
       <div 
         onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
         className={`flex items-center gap-2 px-4 py-2.5 bg-raised border-b border-border flex-shrink-0 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       >
         <div className="flex items-center gap-2" onMouseDown={e => e.stopPropagation()}>

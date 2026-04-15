@@ -29,8 +29,8 @@ const experiences: Experience[] = [
     period: 'Nov 2024 – Present',
     role: 'Software Developer',
     current: true,
-    stack: ['Node.js', 'React Native', 'Redis', 'BullMQ', 'RAG', 'LangChain', 'PostgreSQL', 'AWS EC2', 'Vercel'],
-    impact: 'Scaled a live repair app to 30K+ users, reducing checkout failures by 22% and cutting RAG chatbot response time from hours to under 10 seconds.',
+    stack: ['Node.js', 'React.js', 'React Native', 'Redis', 'BullMQ', 'RAG', 'LangChain', 'PostgreSQL', 'AWS EC2', 'Vercel', 'Expo'],
+    impact: 'Developed and scaled a live repair app to 30K+ users; reduced checkout failures by 22%, cut RAG chatbot response time from hours to under 10 seconds, and increased revenue by 50%.',
     workItems: [
       {
         title: 'AI support chatbot',
@@ -40,7 +40,7 @@ const experiences: Experience[] = [
       },
       {
         title: 'Checkout & payment infrastructure',
-        metric: 'Zero duplicate charges · 20–25% fewer failures',
+        metric: 'No duplicate charges, failures ↓ 20–25%',
         description: 'Built a Redis + BullMQ pricing queue with transactional guarantees, cutting checkout failures by 20–25%. Integrated payment gateways with idempotency keys and signed webhook verification to eliminate duplicate charges entirely.',
         tags: ['Redis', 'BullMQ', 'Idempotency', 'Webhooks', 'Transactions'],
       },
@@ -77,7 +77,7 @@ const experiences: Experience[] = [
     role: 'Software Developer',
     current: false,
     stack: ['Next.js', 'Vercel AI SDK', 'RabbitMQ', 'Zeplo', 'Supabase', 'PostGIS', 'GraphQL'],
-    impact: 'Reduced operational reporting by 60% and cut API response times by up to 70% through AI tooling and architecture modernisation.',
+    impact: 'Improved performance (2s → 200ms), cut failures by 20–25%, reduced complaints by 20%, and lowered infra costs; built real-time dashboards and event-driven systems.',
     workItems: [
       {
         title: 'AI operations dashboard',
@@ -143,7 +143,7 @@ function WorkItemCard({ item }: { item: WorkItem }) {
       <div className="p-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
           <h4 className="font-sans text-base font-semibold text-ink">{item.title}</h4>
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-raised border border-purple/30 text-purple-light text-xs font-semibold whitespace-nowrap">
+          <span className="inline-flex items-center px-3 py-1 rounded-full bg-raised border border-purple/30 text-purple-light text-xs font-semibold sm:whitespace-nowrap">
             {item.metric}
           </span>
         </div>
@@ -216,7 +216,7 @@ function ExperienceCard({ exp }: { exp: Experience }) {
 
           {/* Impact line */}
           <p className="font-mono text-sm text-ink leading-relaxed mt-4">
-            <strong className="text-purple font-semibold">Impact:</strong> {exp.impact}
+            <strong className="text-purple font-semibold"></strong> {exp.impact}
           </p>
 
           {/* Stack tags — always visible */}
