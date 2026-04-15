@@ -252,7 +252,7 @@ export default function Experience() {
         <div className="mb-12">
           <p className="font-mono text-xs text-ink-muted mb-2">$ ls -la ./experience</p>
           <h2 className="font-mono font-black text-3xl sm:text-4xl text-purple mb-1">Work Experience</h2>
-          <p className="font-mono text-xs text-ink-muted">2+ years of experience in shipping in production</p>
+          <p className="font-mono text-xs text-ink-muted">2+ years of experience shipping production-grade systems</p>
         </div>
 
         <div className="space-y-6">

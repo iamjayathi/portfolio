@@ -241,7 +241,7 @@ export default function Hero() {
         {isOpen && (
          <p className="font-mono text-[10px] sm:text-xs text-ink-dim mt-3 ml-1 flex flex-wrap gap-y-1 gap-x-4">
           <span className="flex items-center gap-1.5"><span className="text-red-500">●</span> close → hide</span>
-          <span className="flex items-center gap-1.5"><span className="text-yellow-500">●</span> minimize → fact</span>
+          <span className="flex items-center gap-1.5"><span className="text-yellow-500">●</span> minimize → fun fact</span>
           <span className="flex items-center gap-1.5"><span className="text-green-500">●</span> expand → widen</span>
         </p>
         )}
