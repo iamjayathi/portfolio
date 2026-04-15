@@ -296,8 +296,10 @@ function DotBtn({ bg, hoverBg, symbol, label, onClick }: {
   const [hov, setHov] = useState(false);
   return (
     <button
-      onClick={onClick} title={label}
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
       onMouseDown={e => e.stopPropagation()}
+      onTouchStart={e => e.stopPropagation()}
+      title={label}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
         width: 12, height: 12, borderRadius: '50%',
